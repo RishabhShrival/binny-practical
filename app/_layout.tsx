@@ -1,58 +1,24 @@
-import { createStaticNavigation, DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useFonts } from 'expo-font';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/useColorScheme';
-import Login from './Auth/login';
-import Counter from './counter/counter';
-import Detail from './detail/detail';
-import Display from './Display/display';
-
-
-const RootStack = createNativeStackNavigator({
-  screens: {
-    Login: {
-      screen: Login,
-      options: {title: 'Welcome'},
-    },
-    Display: {
-      screen: Display,
-    },
-    Detail: {
-      screen: Detail,
-    },
-    Counter: {
-      screen: Counter,
-    },
-  },
-});
-
-const Navigation = createStaticNavigation(RootStack);
-
-export type RootStackParamList = {
-  Login: undefined;
-  Detail: undefined;
-  Counter: undefined;
-  Display: undefined;
-};
+import { Stack } from "expo-router";
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  if (!loaded) {
-    // Async font loading only occurs in development.
-    return null;
-  }
-
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Navigation />
-      <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
-    </ThemeProvider>
+  return(
+    <Stack initialRouteName="login">
+      <Stack.Screen
+      name="login"
+      options={{ headerShown: false, animation: "slide_from_right" }}
+      />
+      <Stack.Screen
+      name="display"
+      options={{ headerShown: false, animation: "fade" }}
+      />
+      <Stack.Screen
+      name="detail"
+      options={{ headerShown: true, animation: "slide_from_right" }}
+      />
+      <Stack.Screen
+      name="counter"
+      options={{ headerShown: true, animation: "slide_from_bottom" }}
+      />
+    </Stack>
   );
 }

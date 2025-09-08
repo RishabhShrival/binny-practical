@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "409217488239",
+    "project_id": "binny-test-9390e",
+    "storage_bucket": "binny-test-9390e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:409217488239:android:0b6daab16a98ba325cc49a",
+        "android_client_info": {
+          "package_name": "com.binny.binny_practice"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeEUzNW-mrFPsUgpNUprtRR5iwbCMzzW8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
