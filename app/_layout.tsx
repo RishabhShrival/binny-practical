@@ -1,10 +1,42 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { createStaticNavigation, DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
+import Login from './Auth/login';
+import Counter from './counter/counter';
+import Detail from './detail/detail';
+import Display from './Display/display';
+
+
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Login: {
+      screen: Login,
+      options: {title: 'Welcome'},
+    },
+    Display: {
+      screen: Display,
+    },
+    Detail: {
+      screen: Detail,
+    },
+    Counter: {
+      screen: Counter,
+    },
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+export type RootStackParamList = {
+  Login: undefined;
+  Detail: undefined;
+  Counter: undefined;
+  Display: undefined;
+};
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -19,11 +51,8 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
+      <Navigation />
+      <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
     </ThemeProvider>
   );
 }
