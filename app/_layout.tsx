@@ -34,7 +34,7 @@ export default function RootLayout() {
           />
           <Stack.Screen
             name="counter"
-            options={{ headerShown: true, animation: "flip" }}
+            options={{ headerShown: true, animation: "slide_from_bottom" }}
           />
           <Stack.Screen name="+not-found" />
         </Stack>

@@ -78,22 +78,27 @@ export default function Index() {
 
   return (
     <ThemedView style={styles.container}>
-      <ThemedText style={styles.title}>Login</ThemedText>
+      <ThemedText type='title' style={styles.title}>Login</ThemedText>
       <ThemedView style={styles.passwordContainer}>
         <TextInput
-          style={[styles.input, { flex: 1, marginBottom: 0,color: useColorScheme() === 'dark' ? 'white' : 'black' }]}
+          style={[
+            styles.input,
+            { flex: 1, marginBottom: 0, color: useColorScheme() === 'dark' ? 'white' : 'black' }
+          ]}
           placeholder="email"
           value={username}
           onChangeText={setUsername}
+          placeholderTextColor={useColorScheme() === 'dark' ? '#aaa' : '#888'}
         />
       </ThemedView>
       <ThemedView style={styles.passwordContainer}>
         <TextInput
-          style={[styles.input, { flex: 1, marginBottom: 0,color: useColorScheme() === 'dark' ? 'white' : 'black' }]}
+          style={[styles.input, { flex: 1, marginBottom: 0, color: useColorScheme() === 'dark' ? 'white' : 'black' }]}
           placeholder="Password"
           value={password}
           onChangeText={setPassword}
           secureTextEntry={!showPassword}
+          placeholderTextColor={useColorScheme() === 'dark' ? '#aaa' : '#888'}
         />
         <TouchableOpacity onPress={() => setShowPassword(!showPassword)} style={styles.eyeIcon}>
           <MaterialIcons name={showPassword ? 'visibility' : 'visibility-off'} size={24} color="#888" />
@@ -116,6 +121,12 @@ const styles = StyleSheet.create({
     maxWidth: 350,
     alignSelf: 'center',
   },
+  title: {
+    fontSize: 24,
+    lineHeight: 32,
+    fontWeight: 'bold',
+    marginBottom: 18,
+  },
   passwordContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -134,11 +145,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 16,
   },
   input: {
     height: 40,

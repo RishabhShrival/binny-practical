@@ -50,7 +50,7 @@ export default function Display() {
         <ThemedView style={styles.header}>
           <ThemedText style={styles.headerText}>Posts</ThemedText>
           <TouchableOpacity style={styles.logout}>
-            <MaterialIcons name="logout" size={24} color="white" onPress={() => navigation.replace('/')} />
+            <MaterialIcons name="logout" size={24} color="white" onPress={() => { navigation.replace('/'); setLoading(true); }} />
           </TouchableOpacity>
         </ThemedView>
         
