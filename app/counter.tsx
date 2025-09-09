@@ -11,10 +11,10 @@ export default function Counter() {
             <ThemedText type='subtitle'>Count: {counter}</ThemedText>
             <>
                 <ThemedView style={{ margin: 4 }}>
-                    <Button title="Increment" onPress={() => setCounter(counter + 1)} />
+                    <Button title="Increment" onPress={() => setCounter(counter + 1)} color={'#23bb28ff'} />
                 </ThemedView>
                 <ThemedView style={{ margin: 4 }}>
-                    <Button title="Decrement" onPress={() => setCounter(counter - 1)} />
+                    <Button title="Decrement" onPress={() => setCounter(counter - 1)} color={'#af2a21ff'} />
                 </ThemedView>
             </>
         </ThemedView>

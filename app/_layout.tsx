@@ -4,8 +4,12 @@ export default function RootLayout() {
   return(
     <Stack initialRouteName="login">
       <Stack.Screen
+      name="index"
+      options={{ headerShown: false, animation: "default" }}
+      />
+      <Stack.Screen
       name="login"
-      options={{ headerShown: false, animation: "slide_from_right" }}
+      options={{ headerShown: false, animation: "default" }}
       />
       <Stack.Screen
       name="display"
@@ -17,7 +21,7 @@ export default function RootLayout() {
       />
       <Stack.Screen
       name="counter"
-      options={{ headerShown: true, animation: "slide_from_bottom" }}
+      options={{ headerShown: true, animation: "simple_push" }}
       />
     </Stack>
   );
