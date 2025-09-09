@@ -9,7 +9,7 @@ export default function RootLayout() {
       />
       <Stack.Screen
       name="login"
-      options={{ headerShown: false, animation: "default" }}
+      options={{ headerShown: false, animation: "simple_push" }}
       />
       <Stack.Screen
       name="display"
@@ -21,7 +21,7 @@ export default function RootLayout() {
       />
       <Stack.Screen
       name="counter"
-      options={{ headerShown: true, animation: "simple_push" }}
+      options={{ headerShown: true, animation: "flip" }}
       />
     </Stack>
   );

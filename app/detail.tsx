@@ -1,5 +1,5 @@
 import { useLocalSearchParams } from 'expo-router';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, useColorScheme } from 'react-native';
 import { ThemedText } from './components/ThemedText';
 import { ThemedView } from './components/ThemedView';
 
@@ -12,18 +12,17 @@ type Post = {
 };
 export default function Detail() {
     const props = useLocalSearchParams();
-    console.log(props);
     return (
         <ThemedView style={styles.container}>
             <ThemedText style={styles.header}>Post Details</ThemedText>
-            <ThemedView style={styles.card}>
-                <ThemedText style={styles.label}>User ID:</ThemedText>
-                <ThemedText style={styles.value}>{props.userId}</ThemedText>
-                <ThemedText style={styles.label}>ID:</ThemedText>
-                <ThemedText style={styles.value}>{props.id}</ThemedText>
-                <ThemedText style={styles.label}>Title:</ThemedText>
+            <ThemedView style={[styles.card, { backgroundColor: useColorScheme() === 'dark' ? 'black' : 'white' }]}>
+                <ThemedView style={{display:'flex', flexDirection:'row', justifyContent:'space-between', backgroundColor:'transparent'}}>
+                    <ThemedText style={styles.Id}>User ID: {props.userId}</ThemedText>
+                    {/* <ThemedText style={styles.value}>{props.userId}</ThemedText> */}
+                    <ThemedText style={styles.UserId}>ID: {props.id}</ThemedText>
+                    {/* <ThemedText style={styles.value}>{props.id}</ThemedText> */}
+                </ThemedView>
                 <ThemedText style={styles.title}>{props.title}</ThemedText>
-                <ThemedText style={styles.label}>Body:</ThemedText>
                 <ThemedText style={styles.body}>{props.body}</ThemedText>
             </ThemedView>
         </ThemedView>
@@ -41,6 +40,11 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontWeight: 'bold',
         marginBottom: 24,
+        backgroundColor: '#807d7d86',
+        padding: 8,
+        paddingHorizontal:12,
+        borderRadius: 8,
+        borderWidth: 1
     },
     card: {
         borderRadius: 12,
@@ -53,8 +57,18 @@ const styles = StyleSheet.create({
         width: '100%',
         maxWidth: 400,
     },
+    Id:{
+        fontSize: 18,
+        marginBottom: 8,
+        fontWeight: '600',
+    },
+    UserId:{
+        fontSize: 18,
+        marginBottom: 8,
+        fontWeight: '600',
+    },
     label: {
-        fontSize: 14,
+        fontSize: 18,
         marginTop: 12,
         marginBottom: 2,
         fontWeight: '600',
@@ -69,7 +83,7 @@ const styles = StyleSheet.create({
         marginBottom: 8,
     },
     body: {
-        fontSize: 16,
+        fontSize: 14,
         marginBottom: 8,
     },
 });

@@ -1,8 +1,10 @@
+import { MaterialIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { ActivityIndicator, Button, Pressable, StyleSheet } from 'react-native';
+import { ActivityIndicator, Pressable, StyleSheet, TouchableOpacity } from 'react-native';
 import { FlatList, GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemedText } from './components/ThemedText';
 import { ThemedView } from './components/ThemedView';
 
@@ -35,34 +37,46 @@ export default function Display() {
     );
 
     if(loading){
-      return <ActivityIndicator/>;
+      return (
+      <ThemedView style={{flex:1}}>
+        <ActivityIndicator/>
+      </ThemedView>
+      );
     }
 
   return (
     <ThemedView style={{flex:1}}>
-      <ThemedView style={styles.header}><ThemedText style={styles.headerText}>Posts</ThemedText></ThemedView>
-      <ThemedView style={styles.logout}>
-        <Button title="Logout" onPress={() => navigation.replace('./login')} color='red'/>
-      </ThemedView>
+      <SafeAreaView>
+        <ThemedView style={styles.header}>
+          <ThemedText style={styles.headerText}>Posts</ThemedText>
+        </ThemedView>
+        <TouchableOpacity style={styles.logout}>
+          <MaterialIcons name="logout" size={24} color="white" onPress={() => navigation.replace('./login')} />
+        </TouchableOpacity>
+      </SafeAreaView>
       <GestureHandlerRootView style={{flex:1}}>
-      <FlatList
-        data={posts}
-        keyExtractor={i=>String(i.id)}
-        renderItem={renderItem}
-        contentContainerStyle={{padding:12}}
-        ListFooterComponent={<ThemedView style={styles.footer}><ThemedText>End of List</ThemedText></ThemedView>}
-      />
+        <FlatList
+          data={posts}
+          keyExtractor={i=>String(i.id)}
+          renderItem={renderItem}
+          contentContainerStyle={{padding:12}}
+          ListFooterComponent={<ThemedView style={styles.footer}><ThemedText>End of List</ThemedText></ThemedView>}
+        />
       </GestureHandlerRootView>
       <StatusBar style="auto" />
-      <Button title="Go to Counter" onPress={() => navigation.navigate('./counter')} />
+      {/* <Button title="Go to Counter" onPress={() => navigation.navigate('./counter')} /> */}
+      <TouchableOpacity style={styles.counter}>
+        <MaterialIcons name="access-alarm" size={42} color="white" on onPress={()=>navigation.navigate('./counter')} />
+      </TouchableOpacity>
     </ThemedView>
   );
 }
 const styles = StyleSheet.create({
-  header:{ padding:16, alignItems:'center', borderBottomWidth:1, borderColor:'#eee' },
+  header:{ padding:16, alignItems:'flex-start', borderBottomWidth:1, borderColor:'#eee' },
   headerText:{ fontSize:18, fontWeight:'600' },
-  card:{ padding:12, borderWidth:1, borderColor:'#e5e5e5', borderRadius:10, marginBottom:10 },
+  card:{ padding:12, borderWidth:1, borderColor:'#bfbdbdb2',shadowColor:'#000000ff', borderRadius:10, marginBottom:10 },
   title:{ fontWeight:'700', marginBottom:6 },
   footer:{ padding:16, alignItems:'center' },
-  logout:{ position:'absolute', top:0, right:0, zIndex:1, margin:16 }
+  logout:{ position:'absolute', top:16, right:0, borderRadius:'45%', backgroundColor:'#565252ff', padding:10, paddingRight:8, zIndex:1, margin:16 },
+  counter:{ position:'absolute', bottom:20, right:20, borderRadius:45, backgroundColor:'#565252a5', padding:12, zIndex:1 }
 });

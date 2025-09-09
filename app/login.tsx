@@ -7,6 +7,7 @@ import { Alert, Button, StyleSheet, TextInput, TouchableOpacity } from 'react-na
 import { app } from '../firebaseconfig';
 import { ThemedText } from './components/ThemedText';
 import { ThemedView } from './components/ThemedView';
+import { useColorScheme } from './hooks/useColorScheme.web';
 
 
 export default function Login() {
@@ -30,8 +31,19 @@ export default function Login() {
         const userCredential = await signInWithEmailAndPassword(auth, username, password);
         const user = userCredential.user;
         // Show alert with entered values after login
-        Alert.alert('Login Successful', `email: ${username}`);
-        console.log('User logged in:', user);
+        Alert.alert('Login Successful', `email: ${username}`,[
+          {
+            text:'Cancel',
+            onPress: ()=> console.log('Cancel Pressed'),
+            style:'cancel'
+          },
+          {
+            text:'Ok',
+            onPress: ()=>navigation.push('./display'),
+            style:'default'
+          }
+        ]);
+        // console.log('User logged in:', user);
     }catch(error){
         Alert.alert('Error', 'Failed to initialize analytics');
         setLoading(false);
@@ -39,7 +51,7 @@ export default function Login() {
     }
     // On success:
     setLoading(false);
-    navigation.push('./display');
+    // navigation.push('./display');
   };
 
   const handleSignup = async () => {
@@ -54,13 +66,14 @@ export default function Login() {
         const auth = getAuth(app);
         const userCredential = await createUserWithEmailAndPassword(auth, username, password);
         const user = userCredential.user;
-        console.log('User signed up:', user);
+        // console.log('User signed up:', user);
     }
     catch(error){
         Alert.alert('Error', 'Failed to sign up');
         setLoading(false);
         return;
     }
+    Alert.alert('Account created successfully','You can now log in with your email and password.');
     setLoading(false);
   }
 
@@ -69,7 +82,7 @@ export default function Login() {
       <ThemedText style={styles.title}>Login</ThemedText>
       <ThemedView style={styles.passwordContainer}>
         <TextInput
-          style={[styles.input, { flex: 1, marginBottom: 0 }]}
+          style={[styles.input, { flex: 1, marginBottom: 0,color: useColorScheme() === 'dark' ? 'white' : 'black' }]}
           placeholder="email"
           value={username}
           onChangeText={setUsername}
@@ -77,7 +90,7 @@ export default function Login() {
       </ThemedView>
       <ThemedView style={styles.passwordContainer}>
         <TextInput
-          style={[styles.input, { flex: 1, marginBottom: 0 }]}
+          style={[styles.input, { flex: 1, marginBottom: 0,color: useColorScheme() === 'dark' ? 'white' : 'black' }]}
           placeholder="Password"
           value={password}
           onChangeText={setPassword}
