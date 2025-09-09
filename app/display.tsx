@@ -5,8 +5,8 @@ import React from 'react';
 import { ActivityIndicator, Pressable, StyleSheet, TouchableOpacity } from 'react-native';
 import { FlatList, GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ThemedText } from './components/ThemedText';
-import { ThemedView } from './components/ThemedView';
+import { ThemedText } from '../components/ThemedText';
+import { ThemedView } from '../components/ThemedView';
 
 type Post = {
     userId: number;
@@ -38,8 +38,8 @@ export default function Display() {
 
     if(loading){
       return (
-      <ThemedView style={{flex:1}}>
-        <ActivityIndicator/>
+      <ThemedView style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+        <ActivityIndicator size="large"/>
       </ThemedView>
       );
     }
@@ -49,10 +49,11 @@ export default function Display() {
       <SafeAreaView>
         <ThemedView style={styles.header}>
           <ThemedText style={styles.headerText}>Posts</ThemedText>
+          <TouchableOpacity style={styles.logout}>
+            <MaterialIcons name="logout" size={24} color="white" onPress={() => navigation.replace('/')} />
+          </TouchableOpacity>
         </ThemedView>
-        <TouchableOpacity style={styles.logout}>
-          <MaterialIcons name="logout" size={24} color="white" onPress={() => navigation.replace('./login')} />
-        </TouchableOpacity>
+        
       </SafeAreaView>
       <GestureHandlerRootView style={{flex:1}}>
         <FlatList
@@ -72,11 +73,11 @@ export default function Display() {
   );
 }
 const styles = StyleSheet.create({
-  header:{ padding:16, alignItems:'flex-start', borderBottomWidth:1, borderColor:'#eee' },
+  header:{ padding:16, flexDirection:'row', alignItems:'center',justifyContent:'space-between', borderBottomWidth:1, borderColor:'#eee' },
   headerText:{ fontSize:18, fontWeight:'600' },
   card:{ padding:12, borderWidth:1, borderColor:'#bfbdbdb2',shadowColor:'#000000ff', borderRadius:10, marginBottom:10 },
   title:{ fontWeight:'700', marginBottom:6 },
   footer:{ padding:16, alignItems:'center' },
-  logout:{ position:'absolute', top:16, right:0, borderRadius:'45%', backgroundColor:'#565252ff', padding:10, paddingRight:8, zIndex:1, margin:16 },
+  logout:{ borderRadius:'45%', backgroundColor:'#565252ff', padding:10, paddingRight:8, zIndex:1},
   counter:{ position:'absolute', bottom:20, right:20, borderRadius:45, backgroundColor:'#565252a5', padding:12, zIndex:1 }
 });

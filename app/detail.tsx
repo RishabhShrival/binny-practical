@@ -1,7 +1,7 @@
 import { useLocalSearchParams } from 'expo-router';
 import { StyleSheet, useColorScheme } from 'react-native';
-import { ThemedText } from './components/ThemedText';
-import { ThemedView } from './components/ThemedView';
+import { ThemedText } from '../components/ThemedText';
+import { ThemedView } from '../components/ThemedView';
 
 
 type Post = {

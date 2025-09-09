@@ -1,28 +1,44 @@
-import { Stack } from "expo-router";
+import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { useFonts } from 'expo-font';
+import { Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import 'react-native-reanimated';
+
+import { ThemedView } from '@/components/ThemedView';
+import { useColorScheme } from '@/hooks/useColorScheme';
+import { ActivityIndicator } from 'react-native';
 
 export default function RootLayout() {
-  return(
-    <Stack initialRouteName="login">
-      <Stack.Screen
-      name="index"
-      options={{ headerShown: false, animation: "default" }}
-      />
-      <Stack.Screen
-      name="login"
-      options={{ headerShown: false, animation: "simple_push" }}
-      />
-      <Stack.Screen
-      name="display"
-      options={{ headerShown: false, animation: "fade" }}
-      />
-      <Stack.Screen
-      name="detail"
-      options={{ headerShown: true, animation: "slide_from_right" }}
-      />
-      <Stack.Screen
-      name="counter"
-      options={{ headerShown: true, animation: "flip" }}
-      />
-    </Stack>
+  const colorScheme = useColorScheme();
+  const [loaded] = useFonts({
+    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+  });
+
+  if (!loaded) {
+    return <ThemedView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><ActivityIndicator /></ThemedView>;
+  }
+  return (
+    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <Stack>
+          <Stack.Screen
+            name="index"
+            options={{ headerShown: false, animation: "simple_push" }}
+          />
+          <Stack.Screen
+            name="display"
+            options={{ headerShown: false, animation: "fade" }}
+          />
+          <Stack.Screen
+            name="detail"
+            options={{ headerShown: true, animation: "slide_from_right" }}
+          />
+          <Stack.Screen
+            name="counter"
+            options={{ headerShown: true, animation: "flip" }}
+          />
+          <Stack.Screen name="+not-found" />
+        </Stack>
+        <StatusBar style="auto" />
+    </ThemeProvider>
   );
 }

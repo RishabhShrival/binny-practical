@@ -1,8 +1,8 @@
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useState } from 'react';
 import { Button, TouchableOpacity } from 'react-native';
-import { ThemedText } from './components/ThemedText';
-import { ThemedView } from './components/ThemedView';
+import { ThemedText } from '../components/ThemedText';
+import { ThemedView } from '../components/ThemedView';
 
 export default function Counter() {
     const [counter, setCounter] = useState(0);
