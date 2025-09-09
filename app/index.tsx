@@ -50,7 +50,7 @@ export default function Index() {
     }
     // On success:
     setLoading(false);
-    navigation.push('./display');
+    // navigation.push('./display');
   };
 
   const handleSignup = async () => {
